@@ -9,8 +9,13 @@
 ;; That is a project for a rainy day
 
 ;; Performance improvement
-(setq gc-cons-threshold most-positive-fixnum)
-
+(setenv "LSP_USE_PLISTS" "true")
+(let ((file-name-handler-alist nil)
+      (gc-cons-percentage .6)
+      (gc-cons-threshold most-positive-fixnum)
+      (mode-line-format nil)
+      (read-process-output-max (* 1024 1024))))
+(setq lsp-log-io nil) ; if set to true can cause a performance hit
 ;;
 ;; SETUP PACKAGE SYSTEM
 ;;
@@ -76,6 +81,22 @@
       version-control t      ; Use version numbers on backups,
       kept-new-versions 5    ; keep some new versions
       kept-old-versions 2)   ; and some old ones, too
+
+;; This tells Emacs to put all backups in ~/.emacs.d/backups.
+(custom-set-variables
+ '(backup-directory-alist
+   `(("." . ,(concat user-emacs-directory "backups")))))
+
+;; If visiting a file whos directory does not exist, offer to create directory
+(defun my-create-non-existent-directory ()
+  (let ((parent-directory (file-name-directory buffer-file-name)))
+    (when (and (not (file-exists-p parent-directory))
+               (y-or-n-p (format "Directory `%s' does not exist! Create it?" parent-directory)))
+      (make-directory parent-directory t))))
+
+;; Bind the above function to make it happen automagically
+(add-to-list 'find-file-not-found-functions #'my-create-non-existent-directory)
+
 
 ;; Basic settings
 (setq global-visual-line-mode 1)
@@ -354,6 +375,21 @@ _S_: Light    _M_: Light
 (when (display-graphic-p)
   (load-theme 'material t))
 
+;; Transparency management
+
+(set-frame-parameter nil 'alpha-background 82) ; For current frame
+(add-to-list 'default-frame-alist '(alpha-background . 82)) ; For all new frames henceforth
+
+;; Toggle frame transparency for current frame only
+(defun toggle-transparency ()
+  (interactive)
+  (if (/=
+       (frame-parameter nil 'alpha-background)
+       100)
+      (set-frame-parameter nil 'alpha-background '100)
+    (set-frame-parameter nil 'alpha-background '82)))
+(global-set-key (kbd "C-c t") 'toggle-transparency)
+
 ;;
 ;; CLEANUP
 ;;
@@ -363,10 +399,12 @@ _S_: Light    _M_: Light
 (defconst 30mb 31457280)
 (defconst 50mb 52428800)
 
-(defun fk/defer-garbage-collection ()
-  (setq gc-cons-threshold most-positive-fixnum))
+;(defun fk/defer-garbage-collection ()
+;  (setq gc-cons-threshold most-positive-fixnum))
 
 (setq read-process-output-max 1mb)  ;; lsp-mode's performance suggest
+
+(garbage-collect)
 
 ;; Math font test
 ;; ℕ𝓟⧺×≠≥≤±¬∨∧∃∀λ⟿⟹⊥⊤⊢
