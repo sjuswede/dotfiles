@@ -30,3 +30,10 @@ mv ~/dotfiles ~/.dotfiles
 ```
 
 The structure is one directory per program. This allows for stow'ing only select programs as required.
+
+For example:
+
+```
+stow emacs
+```
+
