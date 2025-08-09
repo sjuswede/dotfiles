@@ -64,8 +64,8 @@
 ;;
 
 ;; Put backup and autosave files in one place
-(let ((backup-dir "~/local/emacs/backups")
-      (auto-saves-dir "~/local/emacs/auto-saves/"))
+(let ((backup-dir "~/.local/emacs/backups")
+      (auto-saves-dir "~/.local/emacs/auto-saves/"))
   (dolist (dir (list backup-dir auto-saves-dir))
     (when (not (file-directory-p dir))
       (make-directory dir t)))
