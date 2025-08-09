@@ -15,7 +15,7 @@
                                    (org-bullets-mode 1))))
 
 ;; My Agenda files
-(setq org-agenda-files '("~/org/agenda"))
+(setq org-agenda-files '("~/Dropbox/org/agenda"))
 
 ;; The following lines are always needed.  Choose your own keys.
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
