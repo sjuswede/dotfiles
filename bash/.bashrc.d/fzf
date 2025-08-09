@@ -1,0 +1,5 @@
+# Set up fzf key bindings and fuzzy completion
+if hash fzf 2>/dev/null; then 
+  eval "$(fzf --bash)"
+fi
+
