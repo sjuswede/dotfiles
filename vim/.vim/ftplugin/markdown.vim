@@ -1,13 +1,17 @@
-
-set spell
-set syntax
-set wrap
+" vimrc config for writing
+" intended to handle text well
+"
+set spell         " spell checking on
+set syntax        " syntax highlighting on
+set wrap          " word wwrap on
 set textwidth=100
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
 set smartindent
-set linebreak
+set linebreak    " wrap at word bounds
+set nolist       " do not show whitespace characters
+
 set number
 set showmatch
 set showbreak=+++
