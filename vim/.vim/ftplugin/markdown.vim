@@ -2,7 +2,7 @@
 " intended to handle text well
 "
 set spell         " spell checking on
-set syntax        " syntax highlighting on
+syntax on     " syntax highlighting on
 set wrap          " word wwrap on
 set textwidth=100
 set tabstop=4 softtabstop=4
