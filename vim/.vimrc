@@ -7,6 +7,17 @@ filetype plugin indent on
 
 call plug#begin("~/.local/share/vim-plugins")
 
+" color schemes
+
+Plug 'colepeters/spacemacs-theme.vim'
+Plug 'sainnhe/gruvbox-material'
+Plug 'phanviet/vim-monokai-pro'
+Plug 'flazz/vim-colorschemes'
+Plug 'chriskempson/base16-vim'
+Plug 'gruvbox-community/gruvbox'
+
+" writing plugins
+
 Plug 'dpelle/vim-LanguageTool' 
 Plug 'ron89/thesaurus_query.vim' 
 Plug 'junegunn/goyo.vim' 
